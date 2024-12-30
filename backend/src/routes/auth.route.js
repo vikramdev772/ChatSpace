@@ -1,5 +1,5 @@
 import express from "express";
-import { userMiddleware } from "../middleware/auth.middleware.js"
+import { userMiddleware } from "../middleware/auth.middleware.js";
 
 import { signin, signup, signout, updateProfile, checkAuth } from "../controllers/auth.controller.js";
 
