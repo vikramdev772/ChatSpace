@@ -40,7 +40,16 @@ export const useAuthStore = create((set) => ({
         }
     },
 
-    singout: async () => {
+    signin: async (data) => {
+        try {
+            const res = await axiosInstance.post('/auth/signin',data);
+            set({ authUser: res.data})
+        } catch(error) {
+
+        }
+    },
+
+    signout: async () => {
         try{
             await axiosInstance.post("/auth/signout");
             set({ authUser: null });

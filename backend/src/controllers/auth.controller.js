@@ -9,7 +9,7 @@ export const signup = async (req, res) => {
     try {
 
         if(!username || !email || !password) {
-            return res.status(400).json({ msg: "all fields are required"})
+            return res.status(400).json({ msg: "All fields are required"})
         }
         const user = await User.findOne({ email});
 
@@ -102,9 +102,10 @@ export const updateProfile = async (req, res) => {
         const uploadResponse = await cloudinary.uploader.upload(profilePic);
         const updateUser = await User.findByIdAndUpdate(
             userId,
-            { profilePic:uploadResponse.secure_url },
+            { profilePic: uploadResponse.secure_url },
             {new: true}
-        )
+        );
+        
         res.status(200).json(updateUser)
     } catch (error) {
         console.log("Error in the Update profile", error);
