@@ -58,7 +58,7 @@ const SignUpPage = () => {
                   <User className='size-6 text-base-content/40'/>
                 </div>
                 <input 
-                  type="text" 
+                  type="" 
                   className={`py-3 rounded-lg border-[2px] border-gray-700 bg-transparent w-full pl-10`}
                   placeholder='Vasanth Kumar'
                   value={signUpForm.username}
@@ -106,7 +106,8 @@ const SignUpPage = () => {
                   className='absolute inset-y-0 right-0 pr-3 flex items-center'
                   onClick={() => setShowPassword(!showPassword)}
                   >
-                  { showPassword ? (
+                  { 
+                    showPassword ? (
                     <EyeOff className='size-5 text-base-content/40'/> 
                     ) : 
                     (

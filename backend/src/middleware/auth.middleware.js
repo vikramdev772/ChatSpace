@@ -4,7 +4,9 @@ import User from "../models/user.model.js";
 export const userMiddleware = async (req, res, next) => {
 
     try {
-        const token = req.cookies.jwtToken;
+        console.log("All Cookies", req.cookies);
+        
+        const token = req.cookies.jwt;        
 
         if (!token) {
             return res.status(401).json({ msg: "Unauthorized - No Token Provided"});
@@ -24,7 +26,7 @@ export const userMiddleware = async (req, res, next) => {
 
         req.user = user;
         
-        next()
+        next();
 
     }catch (error) {
         console.log("Error in the usermiddleware", error.message)

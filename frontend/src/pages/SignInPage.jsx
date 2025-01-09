@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { useAuthStore } from '../store/useAuthStore';
 import AuthImagePattern from '../components/AuthImagePattern';
-import { MessageSquare } from "lucide-react";
+import { Eye, EyeOff, Loader2, Lock, Mail, MessageSquare } from "lucide-react";
+import { Link } from 'react-router-dom';
 
 const SignInPage = () => {
 
@@ -35,13 +36,90 @@ const SignInPage = () => {
           </div>
 
           <form onSubmit={handleSubmit} className='space-y-6'>
+            {/* email */}
+            <div className='flex flex-col'>
+              <label className='label'>
+                <span className='label-text font-medium'>Email</span>
+              </label>
+              <div className='relative'>
+                <div className='absolute inset-y-0 left-0 pl-3 flex items-center'>
+                  <Mail className='size-5 text-base-content/40'/>
+                </div>
+                <input 
+                  type="email" 
+                  className='py-3 border-[2px] border-gray-600 bg-transparent rounded-lg w-full pl-10'
+                  placeholder='vasanth@gmail.com'
+                  value={signinData.email}
+                  onChange={(e) => setSigninData({ ...signinData, email: e.target.value})}
+                />
+              </div>
+            </div>
 
+            {/* password */}
+            <div className='flex flex-col'>
+                <label className='label'>
+                  <span className='label-text font-medium'>Password</span>
+                </label>
+                <div className='relative'>
+                  <div className='absolute inset-y-0 left-0 pl-3 flex items-center'>
+                    <Lock className='size-5  text-base-content/40'/>
+                  </div>
+                  <input 
+                    type={ showPassword ? "text" : 'password'} 
+                    className='py-3 w-full border-[2px] border-gray-600 bg-transparent rounded-lg pl-10'
+                    placeholder='•••••••••'
+                    value={signinData.password}
+                    onChange={(e) => setSigninData({ ...signinData, password: e.target.value })}
+                  />
+                  
+                  <button 
+                    type='button'
+                    className='absolute pr-3 inset-y-0 right-0 flex items-center'
+                    onClick={() => setShowPassword(!showPassword)}
+                    >
+                      {showPassword ? (
+                          <EyeOff className='size-5 text-base-content/40' /> 
+                        ) :
+                        (
+                          <Eye className='size-5 text-base-content/40' />
+                        )}
+                  </button>
+                </div>
+              </div>
+
+              <button 
+                type='submit'
+                className='btn btn-primary w-full'
+                disabled={isSigningIn}
+              >
+                  {
+                    isSigningIn ? (
+                      <>
+                        <Loader2 className='size-5 animate-spin'/>
+                      </>
+                    ) : (
+                      "Sign in"
+                    )
+                  }
+              </button>
           </form>
+
+          <div className='text-center'>
+            <p className='text-base-content/60'>Don't have  an account?{" "}
+              <Link to='/signup' className='link link-primary'>
+                    create account
+              </Link>
+            </p>
+          </div>
+
         </div>
       </div>
 
       {/* Right Side */}
-      <AuthImagePattern />
+      <AuthImagePattern 
+        title={"Welcome back!"}
+        subtitle={"Sign in to continue your conversations and catch up with your message."}
+      />
     </div>
   )
 }

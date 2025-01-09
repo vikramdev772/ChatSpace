@@ -11,7 +11,7 @@ export const signup = async (req, res) => {
         if(!username || !email || !password) {
             return res.status(400).json({ msg: "All fields are required"})
         }
-        const user = await User.findOne({ email});
+        const user = await User.findOne({ email });
 
         if (user) return res.status(400).json({ message: "Email already exists" });
 
@@ -55,19 +55,20 @@ export const signin = async (req, res) => {
             return res.status(400).json({ msg: "Invalid credentials" })
         }
 
-        const isPassword = bcrypt.compare(password, user.password);
+        const isPassword = await bcrypt.compare(password, user.password);
 
         if(!isPassword) {
             return res.status(400).json({ message: "Invalid Password "});
         }
 
         const token = generateToken(user._id, res);
-
+      
         res.status(200).json({
             _id: user._id,
             username: user.username,
             email: user.email,
             profilePic: user.profilePic,
+            token
         })
 
     } catch (error) {
@@ -79,7 +80,7 @@ export const signin = async (req, res) => {
 
 export const signout = (req, res) => {
     try {
-        res.cookie("jwtToken", "", {maxAge:0});
+        res.cookie("jwt", "", {maxAge:0});
         res.status(200).json({
             msg: "logged out successfully"
         })
@@ -90,7 +91,7 @@ export const signout = (req, res) => {
 }
 
 export const updateProfile = async (req, res) => {
-    
+    console.log("Profile update")
     try {
         const { profilePic } = req.body;
         const userId = req.user._id;
@@ -104,7 +105,7 @@ export const updateProfile = async (req, res) => {
             userId,
             { profilePic: uploadResponse.secure_url },
             {new: true}
-        );
+        ).select('-password');
         
         res.status(200).json(updateUser)
     } catch (error) {
@@ -114,6 +115,9 @@ export const updateProfile = async (req, res) => {
 
 export const checkAuth = (req, res) => {
     try {
+        if (!req.user) {
+            return res.status(401).json({ msg: "User not authenticated"})
+        }
         res.status(200).json(req.user);
     } catch (error) {
         console.log("Error in the CheckAuth controller", error.message)
