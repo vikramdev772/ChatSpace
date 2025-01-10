@@ -6,15 +6,12 @@ export const generateToken = (userId, res) => {
         expiresIn: "1d",
     });
 
-    console.log("token the generateToken", token)
-
     res.cookie('jwt', token, {
         maxAge: 7*24*60*60*1000,
         httpOnly: true,
         sameSite: "strict",
         secure: process.env.NODE_ENV !== 'development',
     })
-
 
     return token;
 }

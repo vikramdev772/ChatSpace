@@ -4,7 +4,6 @@ import User from "../models/user.model.js";
 export const userMiddleware = async (req, res, next) => {
 
     try {
-        console.log("All Cookies", req.cookies);
         
         const token = req.cookies.jwt;        
 

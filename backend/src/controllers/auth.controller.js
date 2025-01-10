@@ -91,7 +91,6 @@ export const signout = (req, res) => {
 }
 
 export const updateProfile = async (req, res) => {
-    console.log("Profile update")
     try {
         const { profilePic } = req.body;
         const userId = req.user._id;
