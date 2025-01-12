@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { useChatSote } from '../store/useChatStore'
+import { useChatStore } from '../store/useChatStore'
 import { useAuthStore } from '../store/useAuthStore';
 import { User, Users } from 'lucide-react';
 
 const Sidebar = () => {
-    const { getUsers, users, selectedUser, setSelectedUser, isUsersLoading } = useChatSote();
+    const { getUsers, users, selectedUser, setSelectedUser, isUsersLoading } = useChatStore();
 
     const { onlineUsers } = useAuthStore();
     const [showOnlineOnly, setShowOnlineOnly] = useState(false);
@@ -36,7 +36,6 @@ const Sidebar = () => {
                     /> 
                     <span className='text-sm'>Show online only</span> 
                 </label>
-                <span className='text-xs text-zinc-500'>({onlineUsers.length} online)</span>
             </div>
         </div>
 
@@ -67,8 +66,8 @@ const Sidebar = () => {
                             {onlineUsers.includes(user._id) ? "Online" : "Offline"}
                         </div>
                     </div>
-
                 </button>
+
             ))}
         </div>
         {filteredUsers.length === 0 && (
