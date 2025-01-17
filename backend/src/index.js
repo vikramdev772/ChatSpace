@@ -22,10 +22,11 @@ app.use(cors({
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 
+app.get("/",(req,res)=>res.json({server:"  server started  ✅  "}))
 
 const PORT = process.env.PORT
 
 server.listen(PORT, () => {
-    console.log("Server running on port: "+ PORT)
+    console.log("\n\t Server running on port  💻 : "+ PORT)
     connectDB()
 })
