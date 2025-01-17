@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useChatStore } from '../store/useChatStore'
 import { useAuthStore } from '../store/useAuthStore';
-import { User, Users } from 'lucide-react';
+import { Users } from 'lucide-react';
 
 const Sidebar = () => {
     const { getUsers, users, selectedUser, setSelectedUser, isUsersLoading } = useChatStore();
@@ -36,6 +36,7 @@ const Sidebar = () => {
                     /> 
                     <span className='text-sm'>Show online only</span> 
                 </label>
+                <span className='text-xs text-zinc-500'>({onlineUsers.length-1} online)</span>
             </div>
         </div>
 
@@ -56,7 +57,7 @@ const Sidebar = () => {
                             className='size-12 object-cover rounded-full'
                         />
                         {onlineUsers.includes(user._id) && (
-                            <span className='absolute bottom-0 right-0 size-3 bg-green-500 rounded-full ring-2 ring-red-900' />
+                            <span className='absolute bottom-0 right-0 size-3 bg-green-500 rounded-full ring-2 ring-zinc-900' />
                         )}
                     </div>
                     
