@@ -28,7 +28,7 @@ app.get("/",(req,res)=>res.json({server:"  server started  ✅  "}))
 const PORT = process.env.PORT
 
 server.listen(PORT, () => {
-    console.log("\n\t Server running on port  💻 : "+ PORT)
+    console.log("\n\t✔️  Server running on port  💻 : "+ PORT)
     connectDB()
     // Initialize Cloudinary
     cloudinary.config({
@@ -37,9 +37,9 @@ server.listen(PORT, () => {
         api_secret: process.env.CLOUDINARY_API_SECRET
     }, (error, result) => {
         if (error) {
-            console.error("\n\t ❌ Cloudinary connection failed:", error.message)
+            console.error("\n\t❌ Cloudinary connection failed:", error.message)
         } else {
-            console.log("\n\t ✅ Connected to Cloudinary 🌨️\n")
+            console.log("\n\t✅ Connected to Cloudinary 🌨️\n")
         }
     });
 })
