@@ -57,7 +57,7 @@ export const sendMessage = async (req, res) => {
             io.to(receiverSocketId).emit("newMessage", newMessage)
         }
         
-        res.status(200).json({newMessage})
+        res.status(200).json(newMessage)
 
     } catch (error) {
         res.status(500).json({ message: "Internal server error"})
